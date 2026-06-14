@@ -6,7 +6,6 @@ import { eq } from "drizzle-orm";
 import { generateUserId, validateEmail } from "./auth";
 import { success } from "zod";
 import { encodeBase64url } from "@oslojs/encoding";
-import { DISPLAY } from "$env/static/private";
 
 
 export function generateSecret() {
