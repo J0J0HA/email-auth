@@ -1,0 +1,1 @@
+ALTER TABLE "user" RENAME COLUMN "is_mod" TO "is_dev";

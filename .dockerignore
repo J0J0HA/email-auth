@@ -1,0 +1,9 @@
+Dockerfile
+.dockerignore
+.gitignore
+build
+node_modules
+docker-compose.yml
+README.md
+pgdata
+.env.example
