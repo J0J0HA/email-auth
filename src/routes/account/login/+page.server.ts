@@ -50,7 +50,7 @@ export const actions: Actions = {
 Ein Login zu deinem Account wurde gerade versucht.
 
 Du kannst dich auf diesem Gerät anmelden, indem du auf den folgenden Link klickst:
-${process.env.ORIGIN || "http://localhost:5173"}/account/login/finish?code=${loginToken}
+${process.env.SCHEME}://${process.env.HOSTNAME}/account/login/finish?code=${loginToken}
 
 Wenn du dich auf einem anderen Gerät anmelden möchtest, gib bitte stattdessen den folgenden Code ein: ${loginToken}
 

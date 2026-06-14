@@ -1,7 +1,6 @@
 import { db } from "$lib/server/db";
 import * as table from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
-import { generateUserId, validateEmail } from "./auth";
 import { encodeBase64url } from "@oslojs/encoding";
 
 
@@ -22,7 +21,7 @@ export async function getUserForURT(id: string) {
         .where(eq(table.userRequestToken.id, id))
         .limit(1);
     if (app.length === 0) return null;
-    await db.delete(table.userRequestToken).where(eq(table.userRequestToken.id, id));
+    // await db.delete(table.userRequestToken).where(eq(table.userRequestToken.id, id));
     return app[0];
 }
 

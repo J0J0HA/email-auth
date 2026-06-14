@@ -79,6 +79,8 @@
 				</form>
 				<p>
 					UID: {data.user.id}
+					<br>
+					Zugang zur Entwicklerschnittstelle per E-Mail Anfragen: johannes@jojojux.de
 				</p>
 				<p style="color: red">{form?.message ?? ""}</p>
 			</Column>

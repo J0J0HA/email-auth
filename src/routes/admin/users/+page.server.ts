@@ -45,10 +45,10 @@ export const actions: Actions = {
             await createUser(email, displayName, isDev, isAdmin);
             await sendEmail(email, "Dein Account wurde erstellt",
                 `Hallo ${displayName},
-Bei ${process.env.ORIGIN || "http://localhost:5173"} (Abiwood27) wurde gerade ein Account für dich erstellt.
+Bei ${process.env.HOSTNAME} (Abiwood27) wurde gerade ein Account für dich erstellt.
 
 Du kannst dich mit dieser E-Mail-Adresse unter folgendem Link anmelden:
-${origin}/account/login
+${process.env.SCHEME}://${process.env.HOSTNAME}/account/login
 
 - Abiwood27
 `

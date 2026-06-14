@@ -54,16 +54,16 @@ export const actions: Actions = {
 			await sendEmail(user.email, "Your administrator account has been created",
 				`Hello Administrator,
 
-you have been invited to be administrator of ${process.env.SITE_NAME} at ${process.env.ORIGIN}.
+you have been invited to be administrator of Abiwood27 at ${process.env.HOSTNAME}.
 
 You can log in by clicking the following link:
-${process.env.ORIGIN}/account/login/finish?code=${loginToken}
+${process.env.SCHEME}://${process.env.HOSTNAME}/account/login/finish?code=${loginToken}
 
 If you want to log in on another device, please enter the following code: ${loginToken}
 
 If you don't know what this means, please ignore this email.
 
-Best regards, ${process.env.SITE_NAME}
+Best regards, Abiwood27
 `);
 		} catch {
 			return fail(500, { message: "An error has occurred" });
