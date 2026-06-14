@@ -9,7 +9,7 @@ import { encodeBase64url } from "@oslojs/encoding";
 
 
 export function generateSecret() {
-    const bytes = crypto.getRandomValues(new Uint8Array(25));
+    const bytes = crypto.getRandomValues(new Uint8Array(18));
     const secret = encodeBase64url(bytes);
     return secret;
 }
