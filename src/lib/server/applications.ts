@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { generateUserId, validateEmail } from "./auth";
 import { success } from "zod";
 import { encodeBase64url } from "@oslojs/encoding";
+import { DISPLAY } from "$env/static/private";
 
 
 export function generateSecret() {
@@ -23,7 +24,16 @@ export function listApplicationsByUser(userId: string) {
 }
 
 export async function getApplication(id: string) {
-    const app = await db.select().from(table.application).where(eq(table.application.id, id)).limit(1);
+    const app = await db.select({
+        id: table.application.id,
+        displayName: table.application.displayName,
+        redirectTo: table.application.redirectTo,
+        owner: {
+            id: table.user.id,
+            displayName: table.user.displayName,
+            email: table.user.email,
+        }
+    }).from(table.application).where(eq(table.application.id, id)).leftJoin(table.user, eq(table.application.owner, table.user.id)).limit(1);
     if (app.length === 0) return null;
     return app[0];
 }

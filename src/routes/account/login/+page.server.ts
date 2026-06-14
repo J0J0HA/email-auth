@@ -19,7 +19,9 @@ export const load: PageServerLoad = async (event) => {
 export const actions: Actions = {
 	login: async (event) => {
 		const formData = await event.request.formData();
+		const returnTo = formData.get("returnTo")?.toString();
 		const email = formData.get("email");
+		console.log(returnTo)
 
 		if (!auth.validateEmail(email)) {
 			return fail(400, { message: "Ungültige E-Mail-Adresse" });
@@ -38,7 +40,7 @@ export const actions: Actions = {
 
 		const loginToken = auth.generateLoginToken();
 		try {
-			await auth.createLoginToken(loginToken, existingUser.id);
+			await auth.createLoginToken(loginToken, existingUser.id, returnTo || "/account");
 		} catch (e) {
 			console.error(e);
 			return fail(500, { message: "Datenbankfehler" });

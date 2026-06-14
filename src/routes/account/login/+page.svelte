@@ -5,6 +5,7 @@
 	import VerticalPage from "../../VerticalPage.svelte";
 	import type { ActionData } from "./$types";
 	import type { PageServerData } from "./$types";
+	import { page } from "$app/state";
 
 	let { form, data }: { form: ActionData; data: PageServerData } = $props();
 </script>
@@ -17,14 +18,18 @@
 	<Halfs firstSize={1} secondSize={4}>
 		{#snippet first()}
 			<Center fw fh>
-				<h1>
-					Anmelden
-				</h1>
+				<h1>Anmelden</h1>
 			</Center>
 		{/snippet}
 		{#snippet second()}
 			<form method="post" action="?/login" use:enhance>
 				<Column fw fh>
+					<input
+						type="hidden"
+						name="returnTo"
+						value={page.url.searchParams.get("return") ||
+							"/account"}
+					/>
 					<Input
 						name="email"
 						type="email"
@@ -39,9 +44,7 @@
 				</Column>
 			</form>
 			<p style:text-align="center">
-				<a href="/account/login/finish">
-					Ich habe einen Login-Code
-				</a>
+				<a href="/account/login/finish"> Ich habe einen Login-Code </a>
 			</p>
 		{/snippet}
 	</Halfs>

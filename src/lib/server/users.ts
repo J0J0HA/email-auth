@@ -16,10 +16,10 @@ export function getUser() {
 }
 
 export function getRequiredUser() {
-    const { locals } = getRequestEvent();
+    const { locals, url } = getRequestEvent();
 
     if (!locals.user) {
-        return redirect(302, "/account/login");
+        return redirect(302, "/account/login?return=" + encodeURIComponent(url.toString()));
     }
 
     return locals.user;
