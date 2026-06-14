@@ -41,11 +41,11 @@
 					<Input
 						name="displayName"
 						type="text"
-						placeholder="Anzeigenahme"
+						placeholder="Anzeigename"
 						fw
 						value={data.user.displayName}
 					>
-						Anzeigenahme
+						Anzeigename
 					</Input>
 					<Input
 						name="email"
@@ -79,6 +79,8 @@
 				</form>
 				<p>
 					UID: {data.user.id}
+					<br>
+					<br>
 					<br>
 					Zugang zur Entwicklerschnittstelle per E-Mail Anfragen: johannes@jojojux.de
 				</p>
