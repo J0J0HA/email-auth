@@ -40,7 +40,7 @@
         <h2>Developer</h2>
         <ul>
             <li>
-                <a href="/developers/applications" use:hightlightIfOpen>
+                <a href="/developer/applications" use:hightlightIfOpen>
                     <FIcon icon="code" />
                     Applikationen
                 </a>
@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/developers/applications" use:hightlightIfOpen>
+                    <a href="/admin/applications" use:hightlightIfOpen>
                         <FIcon icon="code" />
                         Applikationen
                     </a>
