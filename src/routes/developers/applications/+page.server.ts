@@ -24,8 +24,9 @@ export const actions: Actions = {
             return fail(400, { success: false, message: "Ungültige Daten" });
         }
 
+        let app;
         try {
-            await createApplication(user.id, displayName, redirectTo);
+            app = await createApplication(user.id, displayName, redirectTo);
         } catch (e) {
             console.error(e);
             return fail(500, { success: false, message: "Datenbankfehler" });
@@ -33,7 +34,7 @@ export const actions: Actions = {
 
         return {
             success: true,
-            message: "Applikation erstellt",
+            message: "Applikation erstellt. Secret (viewed only once): " + app.secret,
         };
     },
     updateApplication: async ({ request }) => {

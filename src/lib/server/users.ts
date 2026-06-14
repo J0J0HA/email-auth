@@ -39,6 +39,12 @@ export function listUsers() {
     return db.select().from(table.user);
 }
 
+export async function getUserById(userId: string) {
+    const user = await db.select().from(table.user).where(eq(table.user.id, userId)).limit(1);
+    if (user.length !== 1) return null;
+    return user[0];
+}
+
 export function createUser(email: string, displayName: string, isDev = false, isAdmin = false) {
     if (!validateEmail(email)) {
         throw new Error("Ungültige E-Mail-Adresse");

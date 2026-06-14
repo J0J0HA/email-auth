@@ -1,4 +1,12 @@
-
-
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<h1>Ein schnell zusammengeschusterter "OAuth"-Server</h1>
+<ul>
+    <li>
+        <a href="/account">Profil bearbeiten</a>
+    </li>
+    <li>
+        <a href="/developer">Dev-Panel</a>
+    </li>
+    <li>
+        <a href="/admin">Admin-Panel</a>
+    </li>
+</ul>

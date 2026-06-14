@@ -1,0 +1,1 @@
+ALTER TABLE "application" ADD COLUMN "secret" text NOT NULL;

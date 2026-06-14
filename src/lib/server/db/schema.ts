@@ -28,6 +28,7 @@ export const application = pgTable("application", {
 	owner: text("user_id").notNull().references(() => user.id),
 	displayName: text("display_name").notNull(),
 	redirectTo: text("redirect_to").notNull(),
+	secretHash: text("secret").notNull(),
 });
 
 export const userRequestToken = pgTable("user_request_token", {
