@@ -1,5 +1,4 @@
-import type { Form } from "$lib/neoform/types/formDefinition";
-import { boolean, integer, jsonb, pgTable, serial, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
 	id: text("id").primaryKey(),
@@ -8,6 +7,8 @@ export const user = pgTable("user", {
 	passwordHash: text("password_hash").default("").notNull(),
 	isAdmin: boolean("is_admin").default(false).notNull(),
 	isDev: boolean("is_dev").default(false).notNull(),
+	isElevated: boolean("is_elevated").default(false).notNull(),
+	isTeacher: boolean("is_teacher").default(false).notNull(),
 });
 
 export const loginToken = pgTable("login_token", {

@@ -35,6 +35,8 @@ export const actions: Actions = {
         const displayName = data.get("displayName")?.toString() || email.split("@")[0] || "User";
         const isAdmin = user.id === data.get("userId") ? user.isAdmin : data.get("isAdmin") === "on";
         const isDev = user.isAdmin || (user.id === data.get("userId") ? user.isDev : data.get("isDev") === "on");
+        const isTeacher = data.get("isTeacher") === "on";
+        const isElevated = data.get("isElevated") === "on";
 
         const existingUser = await db.select().from(table.user).where(eq(table.user.email, email));
         if (existingUser.length > 0) {
@@ -42,10 +44,10 @@ export const actions: Actions = {
         }
 
         try {
-            await createUser(email, displayName, isDev, isAdmin);
+            await createUser({ email, displayName, isDev, isAdmin, isTeacher, isElevated });
             await sendEmail(email, "Dein Account wurde erstellt",
                 `Hallo ${displayName},
-Bei ${process.env.HOSTNAME} (Abiwood27) wurde gerade ein Account für dich erstellt.
+Bei ${process.env.HOSTNAME} (Abiwood27) wurde gerade ein ${isTeacher ? "Leherer" : "Schüler"}-Account für dich erstellt.
 
 Du kannst dich mit dieser E-Mail-Adresse unter folgendem Link anmelden:
 ${process.env.SCHEME}://${process.env.HOSTNAME}/account/login

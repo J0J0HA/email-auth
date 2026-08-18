@@ -25,7 +25,14 @@ export function getRequiredUser() {
     return locals.user;
 }
 
-export function updateUser(userId: string, data: { displayName?: string; email?: string, isAdmin?: boolean, isDev?: boolean }) {
+export function updateUser(userId: string, data: {
+    displayName?: string;
+    email?: string;
+    isAdmin?: boolean;
+    isDev?: boolean;
+    isTeacher?: boolean;
+    isElevated?: boolean;
+}) {
     if (data.email && !validateEmail(data.email)) {
         throw new Error("Ungültige E-Mail-Adresse");
     }
@@ -45,16 +52,20 @@ export async function getUserById(userId: string) {
     return user[0];
 }
 
-export function createUser(email: string, displayName: string, isDev = false, isAdmin = false) {
-    if (!validateEmail(email)) {
+export function createUser(data: {
+    displayName: string;
+    email: string;
+    isAdmin: boolean;
+    isDev: boolean;
+    isTeacher: boolean;
+    isElevated: boolean;
+}) {
+    if (!validateEmail(data.email)) {
         throw new Error("Ungültige E-Mail-Adresse");
     }
     const user: table.UserI = {
         id: generateUserId(),
-        email,
-        displayName,
-        isAdmin,
-        isDev,
+        ...data
     };
     return db.insert(table.user).values(user);
 }

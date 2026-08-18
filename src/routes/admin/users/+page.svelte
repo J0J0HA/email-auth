@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { Button, FIcon, Input, Row, Spacer } from "jxlib";
-    import type { ActionData, PageServerData } from "./$types";
+    import { enhance } from "$app/forms";
     import { goto } from "$app/navigation";
+    import { page } from "$app/state";
     import {
         deleteUser,
         getLoginCodeForUser,
         getUsers,
         loginAsUser,
     } from "$lib/remote/users.remote";
-    import { enhance } from "$app/forms";
-    import { page } from "$app/state";
+    import { Button, FIcon, Input, Row, Spacer } from "jxlib";
+    import type { ActionData, PageServerData } from "./$types";
 
     let { data, form }: { data: PageServerData; form: ActionData } = $props();
 
@@ -28,6 +28,8 @@
     let editingUserId = $state<string | null>(null);
     let editingDisplayName = $state("");
     let editingEmail = $state("");
+    let editingisTeacher = $state(false);
+    let editingisElevated = $state(false);
     let editingisDev = $state(false);
     let editingIsAdmin = $state(false);
 
@@ -37,9 +39,7 @@
 </script>
 
 <div class="inset">
-    <h1>
-        Nutzer
-    </h1>
+    <h1>Nutzer</h1>
     <br />
 
     <Row fw justify="end">
@@ -53,6 +53,8 @@
                 editingUserId = null;
                 editingDisplayName = "";
                 editingEmail = "";
+                editingisTeacher = false;
+                editingisElevated = false;
                 editingisDev = false;
                 editingIsAdmin = false;
             }}
@@ -109,6 +111,24 @@
             >
                 Email-Addresse
             </Input>
+            <br />
+            <label>
+                <input
+                    type="checkbox"
+                    name="isElevated"
+                    id="isElevated"
+                    bind:checked={editingisElevated}
+                /> Abikomitee
+            </label>
+            <br />
+            <label>
+                <input
+                    type="checkbox"
+                    name="isTeacher"
+                    id="isTeacher"
+                    bind:checked={editingisTeacher}
+                /> Lehrer
+            </label>
             <br />
             <label>
                 <input
@@ -185,13 +205,18 @@
                 <tr class:highlighted={user.id === hightlightUserId}>
                     <td>{user.displayName}</td>
                     <td>{user.email}</td>
-                    <td
-                        >{user.isAdmin
+                    <td>
+                        {user.isAdmin
                             ? "Admin"
                             : user.isDev
                               ? "Developer"
-                              : "User"}</td
-                    >
+                              : "User"}
+                        | {user.isTeacher
+                            ? "Lehrer"
+                            : user.isElevated
+                              ? "Abi-Komitee"
+                              : "Schüler"}
+                    </td>
                     <td>
                         <Row>
                             <Button
@@ -239,6 +264,8 @@
                                     editingEmail = user.email;
                                     editingisDev = user.isDev || user.isAdmin;
                                     editingIsAdmin = user.isAdmin;
+                                    editingisTeacher = user.isTeacher;
+                                    editingisElevated = user.isElevated;
                                 }}
                             />
                             <Button

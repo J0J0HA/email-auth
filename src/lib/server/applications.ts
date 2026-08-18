@@ -1,11 +1,9 @@
-import * as bcrypt from "bcrypt";
 import { db } from "$lib/server/db";
 import * as table from "$lib/server/db/schema";
-import { json, redirect } from "@sveltejs/kit";
-import { eq } from "drizzle-orm";
-import { generateUserId, validateEmail } from "./auth";
-import { success } from "zod";
 import { encodeBase64url } from "@oslojs/encoding";
+import * as bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
+import { generateUserId } from "./auth";
 
 
 export function generateSecret() {
