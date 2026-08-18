@@ -18,8 +18,9 @@
 	<Halfs firstSize={1} secondSize={4}>
 		{#snippet first()}
 			<Center fw fh>
-				<h1>
-					Weiter zu {data.app?.displayName}
+				<h1 style:text-align="center">Weiter zu</h1>
+				<h1 style:text-align="center">
+					{data.app?.displayName}
 				</h1>
 			</Center>
 		{/snippet}
@@ -27,7 +28,7 @@
 			<form method="post" action="?/continue" use:enhance>
 				<Column fw fh>
 					<p style:text-align="center">
-						Das ist eine App von {data.app?.owner?.displayName}.
+						"{data.app?.displayName}" ist eine App von {data.app?.owner?.displayName}.
 						<br />
 						Kontakt zum Entwickler: {data.app?.owner?.email}
 					</p>
