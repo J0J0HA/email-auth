@@ -86,9 +86,11 @@ ${process.env.SCHEME}://${process.env.HOSTNAME}/account/login
         const displayName = data.get("displayName")?.toString() || email.split("@")[0] || "User";
         const isDev = data.get("isDev") === "on";
         const isAdmin = data.get("isAdmin") === "on";
+        const isTeacher = data.get("isTeacher") === "on";
+        const isElevated = data.get("isElevated") === "on";
 
         try {
-            await updateUser(userId, { displayName, email, isDev, isAdmin });
+            await updateUser(userId, { displayName, email, isDev, isAdmin, isElevated, isTeacher });
         } catch (e) {
             console.error(e);
             return fail(500, { success: false, message: "Datenbankfehler" });
